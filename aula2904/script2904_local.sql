@@ -6,14 +6,12 @@ select * from dependente;
 rollback;
 commit;
 
-drop trigger trigger_exclusao_emp;
-
 delimiter &&
-create trigger trigger_exclusao_emp before delete
+create trigger gatilho_exclusao_emp before delete  
 on empregado
-for each row 
+for each row
 begin
-	delete from dependente dep where dep.cod_emp = old.cod_emp;
+	delete from dependente dep where dep.cod_emp =  old.cod_emp;
 end
 &&
 
@@ -22,4 +20,4 @@ delete from empregado where cod_emp=17;
 select * from empregado;
 select * from dependente;
 rollback;
-commit;
+commit
